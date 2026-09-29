@@ -616,7 +616,7 @@
           </div>
 
           <p>
-            ${escapeHTML(experience || "Descreva suas atividades profissionais.")}
+            ${experience ? escapeHTML(experience) : ""}
           </p>
 
         `;
