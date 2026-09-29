@@ -346,22 +346,57 @@
           placeholder="Escreva brevemente o que você busca profissionalmente."
         ></textarea>
 
+      >
         <h3 class="section-title">💼 Experiência profissional</h3>
 
-        <label for="company">Empresa</label>
-        <input id="company" type="text" placeholder="Nome da empresa">
+<div id="experienceContainer">
 
-        <label for="position">Cargo</label>
-        <input id="position" type="text" placeholder="Seu cargo">
+<div class="experience-item">
 
-        <label for="period">Período</label>
-        <input id="period" type="text" placeholder="Ex.: 2022 - 2025">
+<h4>Experiência 1</h4>
 
-        <label for="experience">Principais atividades</label>
-        <textarea
-          id="experience"
-          placeholder="Descreva suas principais atividades e responsabilidades."
-        ></textarea>
+<label>Empresa</label>
+
+<input
+type="text"
+class="company"
+placeholder="Nome da empresa"
+>
+
+<label>Cargo</label>
+
+<input
+type="text"
+class="position"
+placeholder="Seu cargo"
+>
+
+<label>Período</label>
+
+<input
+type="text"
+class="period"
+placeholder="Ex.: 2022 - 2025"
+>
+
+<label>Principais atividades</label>
+
+<textarea
+class="experience"
+placeholder="Descreva suas principais atividades e responsabilidades."
+></textarea>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="button button-secondary"
+onclick="addExperience()"
+>
+➕ Adicionar experiência
+</button>
 
         <h3 class="section-title">🎓 Formação</h3>
 
@@ -524,22 +559,18 @@
   <script>
 
     const fields = [
-      "name",
-      "job",
-      "phone",
-      "email",
-      "city",
-      "linkedin",
-      "objective",
-      "company",
-      "position",
-      "period",
-      "experience",
-      "education",
-      "institution",
-      "educationPeriod",
-      "skillsInput"
-    ];
+  "name",
+  "job",
+  "phone",
+  "email",
+  "city",
+  "linkedin",
+  "objective",
+  "education",
+  "institution",
+  "educationPeriod",
+  "skillsInput"
+];
 
     fields.forEach(function(id) {
 
@@ -556,6 +587,74 @@
 
     }
 
+    function addExperience() {
+  const container = document.getElementById("experienceContainer");
+
+  const item = document.createElement("div");
+  item.className = "experience-item";
+
+  item.innerHTML = `
+    <hr>
+
+    <h4>Nova experiência</h4>
+
+    <label>Empresa</label>
+
+    <input
+      type="text"
+      class="company"
+      placeholder="Nome da empresa"
+    >
+
+    <label>Cargo</label>
+
+    <input
+      type="text"
+      class="position"
+      placeholder="Seu cargo"
+    >
+
+    <label>Período</label>
+
+    <input
+      type="text"
+      class="period"
+      placeholder="Ex.: 2022 - 2025"
+    >
+
+    <label>Principais atividades</label>
+
+    <textarea
+      class="experience"
+      placeholder="Descreva suas principais atividades e responsabilidades."
+    ></textarea>
+
+    <button
+      type="button"
+      class="button button-secondary"
+      onclick="removeExperience(this)"
+    >
+      🗑️ Remover experiência
+    </button>
+  `;
+
+  container.appendChild(item);
+
+  item.querySelectorAll("input, textarea").forEach(function(element) {
+    element.addEventListener("input", updateResume);
+  });
+
+  updateResume();
+}
+
+function removeExperience(button) {
+  const item = button.closest(".experience-item");
+
+  if (item) {
+    item.remove();
+    updateResume();
+  }
+}
 
     function updateResume() {
 
@@ -593,38 +692,52 @@
         objective ? "" : "empty-message";
 
 
-      const company = value("company");
-      const position = value("position");
-      const period = value("period");
-      const experience = value("experience");
+       const experienceElement =
+  document.getElementById("previewExperience");
 
-      const experienceElement =
-        document.getElementById("previewExperience");
+experienceElement.innerHTML = "";
 
+const experienceItems =
+  document.querySelectorAll(".experience-item");
 
-      if (company || position || period || experience) {
+experienceItems.forEach(function(item) {
 
-        experienceElement.innerHTML = `
+  const company =
+    item.querySelector(".company").value.trim();
 
-          <div class="experience-title">
-            ${escapeHTML(position || "Cargo")}
-          </div>
+  const position =
+    item.querySelector(".position").value.trim();
 
-          <div class="experience-company">
-            ${escapeHTML(company || "Empresa")}
-            ${period ? " · " + escapeHTML(period) : ""}
-          </div>
+  const period =
+    item.querySelector(".period").value.trim();
 
-          <p>
-            ${experience ? escapeHTML(experience) : ""}
-          </p>
+  const experience =
+    item.querySelector(".experience").value.trim();
 
-        `;
+  if (company || position || period || experience) {
 
-      } else {
+    experienceElement.innerHTML += `
+      <div class="experience-block">
 
-        experienceElement.innerHTML = "";
-          
+        <div class="experience-title">
+          ${escapeHTML(position || "Cargo")}
+        </div>
+
+        <div class="experience-company">
+          ${escapeHTML(company || "Empresa")}
+          ${period ? " · " + escapeHTML(period) : ""}
+        </div>
+
+        ${
+          experience
+            ? `<p>${escapeHTML(experience)}</p>`
+            : ""
+        }
+
+      </div>
+    `;
+  }
+});
 
       }
 
@@ -689,6 +802,38 @@
 
     }
 
+    function clearForm() {
+
+  if (!confirm("Deseja apagar todos os dados?"))
+    return;
+
+  fields.forEach(function(id) {
+    document.getElementById(id).value = "";
+  });
+
+  const experienceItems =
+    document.querySelectorAll(".experience-item");
+
+  experienceItems.forEach(function(item, index) {
+
+    if (index === 0) {
+
+      item.querySelector(".company").value = "";
+      item.querySelector(".position").value = "";
+      item.querySelector(".period").value = "";
+      item.querySelector(".experience").value = "";
+
+    } else {
+
+      item.remove();
+
+    }
+
+  });
+
+  updateResume();
+
+    }
 
     function escapeHTML(text) {
 
@@ -701,21 +846,7 @@
     }
 
 
-    function clearForm() {
-
-      if (!confirm("Deseja apagar todos os dados?")) {
-        return;
-      }
-
-      fields.forEach(function(id) {
-
-        document.getElementById(id).value = "";
-
-      });
-
-      updateResume();
-
-    }
+    
 
 
     updateResume();
