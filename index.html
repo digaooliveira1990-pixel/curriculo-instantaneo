@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Currículo Instantâneo — Grátis e sem cadastro</title>
+
+  <meta
+    name="description"
+    content="Crie seu currículo grátis, rápido e sem cadastro. Preencha seus dados e salve em PDF."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 28px 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 0;
+      color: #d1d5db;
+      font-size: 15px;
+    }
+
+    .container {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .intro h2 {
+      margin-bottom: 8px;
+    }
+
+    .intro p {
+      color: #6b7280;
+      margin-top: 0;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .section-title {
+      margin-top: 28px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
+      font-size: 17px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      background: white;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .button {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .button-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .skill {
+      background: #e5e7eb;
+      padding: 7px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    /* CURRÍCULO */
+
+    .resume {
+      background: white;
+      padding: 36px;
+      min-height: 900px;
+      color: #111827;
+    }
+
+    .resume-header {
+      border-bottom: 2px solid #111827;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .resume-name {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 0 0 6px;
+    }
+
+    .resume-job {
+      font-size: 18px;
+      color: #374151;
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .resume-section {
+      margin-top: 22px;
+    }
+
+    .resume-section h3 {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #d1d5db;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .resume-section p {
+      line-height: 1.6;
+      white-space: pre-line;
+      font-size: 14px;
+    }
+
+    .experience-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .experience-company {
+      color: #4b5563;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .empty-message {
+      color: #9ca3af;
+      font-style: italic;
+    }
+
+    .privacy {
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+
+      .preview-card {
+        position: sticky;
+        top: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .resume {
+        padding: 24px;
+        min-height: auto;
+      }
+
+      .resume-name {
+        font-size: 25px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      header,
+      .intro,
+      .form-card,
+      .privacy,
+      .print-hide {
+        display: none !important;
+      }
+
+      .container {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .preview-card {
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .resume {
+        padding: 30px;
+        box-shadow: none;
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Currículo Instantâneo</h1>
+    <p>Crie seu currículo grátis, rápido e sem cadastro.</p>
+  </header>
+
+  <main class="container">
+
+    <div class="intro">
+      <h2>Crie seu currículo</h2>
+      <p>Preencha seus dados e veja o resultado em tempo real.</p>
+    </div>
+
+    <div class="layout">
+
+      <!-- FORMULÁRIO -->
+
+      <section class="card form-card">
+
+        <h2>📝 Seus dados</h2>
+
+        <label for="name">Nome completo</label>
+        <input id="name" type="text" placeholder="Ex.: João da Silva">
+
+        <label for="job">Cargo desejado</label>
+        <input id="job" type="text" placeholder="Ex.: Auxiliar Administrativo">
+
+        <label for="phone">Telefone</label>
+        <input id="phone" type="tel" placeholder="Ex.: (11) 99999-9999">
+
+        <label for="email">E-mail</label>
+        <input id="email" type="email" placeholder="Ex.: joao@email.com">
+
+        <label for="city">Cidade / Estado</label>
+        <input id="city" type="text" placeholder="Ex.: São Paulo - SP">
+
+        <label for="linkedin">LinkedIn (opcional)</label>
+        <input id="linkedin" type="text" placeholder="linkedin.com/in/seunome">
+
+        <h3 class="section-title">🎯 Objetivo profissional</h3>
+
+        <label for="objective">Objetivo</label>
+        <textarea
+          id="objective"
+          placeholder="Escreva brevemente o que você busca profissionalmente."
+        ></textarea>
+
+        <h3 class="section-title">💼 Experiência profissional</h3>
+
+        <label for="company">Empresa</label>
+        <input id="company" type="text" placeholder="Nome da empresa">
+
+        <label for="position">Cargo</label>
+        <input id="position" type="text" placeholder="Seu cargo">
+
+        <label for="period">Período</label>
+        <input id="period" type="text" placeholder="Ex.: 2022 - 2025">
+
+        <label for="experience">Principais atividades</label>
+        <textarea
+          id="experience"
+          placeholder="Descreva suas principais atividades e responsabilidades."
+        ></textarea>
+
+        <h3 class="section-title">🎓 Formação</h3>
+
+        <label for="education">Curso / Formação</label>
+        <input id="education" type="text" placeholder="Ex.: Ensino Médio Completo">
+
+        <label for="institution">Instituição</label>
+        <input id="institution" type="text" placeholder="Nome da instituição">
+
+        <label for="educationPeriod">Período</label>
+        <input id="educationPeriod" type="text" placeholder="Ex.: 2018 - 2020">
+
+        <h3 class="section-title">🛠️ Habilidades</h3>
+
+        <label for="skillsInput">
+          Separe as habilidades por vírgula
+        </label>
+
+        <input
+          id="skillsInput"
+          type="text"
+          placeholder="Ex.: Excel, Power BI, Atendimento, Organização"
+        >
+
+        <button
+          class="button button-primary"
+          onclick="window.print()"
+        >
+          ⬇️ Baixar / Salvar em PDF
+        </button>
+
+        <button
+          class="button button-secondary"
+          onclick="clearForm()"
+        >
+          Limpar formulário
+        </button>
+
+        <p class="privacy">
+          🔒 Seus dados ficam no seu navegador nesta versão.
+        </p>
+
+      </section>
+
+
+      <!-- PRÉVIA -->
+
+      <section class="card preview-card">
+
+        <div class="print-hide">
+          <h2>👀 Prévia do currículo</h2>
+          <p style="color:#6b7280;">
+            Seu currículo aparece aqui enquanto você preenche os dados.
+          </p>
+        </div>
+
+        <div class="resume" id="resume">
+
+          <div class="resume-header">
+
+            <h1 class="resume-name" id="previewName">
+              Seu Nome
+            </h1>
+
+            <div class="resume-job" id="previewJob">
+              Cargo desejado
+            </div>
+
+            <div class="contact">
+
+              <span id="previewPhone">
+                Telefone
+              </span>
+
+              ·
+
+              <span id="previewEmail">
+                E-mail
+              </span>
+
+              <br>
+
+              <span id="previewCity">
+                Cidade / Estado
+              </span>
+
+              <br>
+
+              <span id="previewLinkedin"></span>
+
+            </div>
+
+          </div>
+
+
+          <div class="resume-section">
+
+            <h3>Objetivo profissional</h3>
+
+            <p id="previewObjective" class="empty-message">
+              Seu objetivo profissional aparecerá aqui.
+            </p>
+
+          </div>
+
+
+          <div class="resume-section">
+
+            <h3>Experiência profissional</h3>
+
+            <div id="previewExperience">
+
+              <p class="empty-message">
+                Sua experiência profissional aparecerá aqui.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="resume-section">
+
+            <h3>Formação</h3>
+
+            <div id="previewEducation">
+
+              <p class="empty-message">
+                Sua formação aparecerá aqui.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="resume-section">
+
+            <h3>Habilidades</h3>
+
+            <div class="skills" id="previewSkills">
+
+              <span class="empty-message">
+                Suas habilidades aparecerão aqui.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    const fields = [
+      "name",
+      "job",
+      "phone",
+      "email",
+      "city",
+      "linkedin",
+      "objective",
+      "company",
+      "position",
+      "period",
+      "experience",
+      "education",
+      "institution",
+      "educationPeriod",
+      "skillsInput"
+    ];
+
+    fields.forEach(function(id) {
+
+      const element = document.getElementById(id);
+
+      element.addEventListener("input", updateResume);
+
+    });
+
+
+    function value(id) {
+
+      return document.getElementById(id).value.trim();
+
+    }
+
+
+    function updateResume() {
+
+      document.getElementById("previewName").textContent =
+        value("name") || "Seu Nome";
+
+      document.getElementById("previewJob").textContent =
+        value("job") || "Cargo desejado";
+
+      document.getElementById("previewPhone").textContent =
+        value("phone") || "Telefone";
+
+      document.getElementById("previewEmail").textContent =
+        value("email") || "E-mail";
+
+      document.getElementById("previewCity").textContent =
+        value("city") || "Cidade / Estado";
+
+
+      const linkedin = value("linkedin");
+
+      document.getElementById("previewLinkedin").textContent =
+        linkedin ? linkedin : "";
+
+
+      const objective = value("objective");
+
+      const objectiveElement =
+        document.getElementById("previewObjective");
+
+      objectiveElement.textContent =
+        objective || "Seu objetivo profissional aparecerá aqui.";
+
+      objectiveElement.className =
+        objective ? "" : "empty-message";
+
+
+      const company = value("company");
+      const position = value("position");
+      const period = value("period");
+      const experience = value("experience");
+
+      const experienceElement =
+        document.getElementById("previewExperience");
+
+
+      if (company || position || period || experience) {
+
+        experienceElement.innerHTML = `
+
+          <div class="experience-title">
+            ${escapeHTML(position || "Cargo")}
+          </div>
+
+          <div class="experience-company">
+            ${escapeHTML(company || "Empresa")}
+            ${period ? " · " + escapeHTML(period) : ""}
+          </div>
+
+          <p>
+            ${escapeHTML(experience || "Descreva suas atividades profissionais.")}
+          </p>
+
+        `;
+
+      } else {
+
+        experienceElement.innerHTML =
+          '<p class="empty-message">Sua experiência profissional aparecerá aqui.</p>';
+
+      }
+
+
+      const education = value("education");
+      const institution = value("institution");
+      const educationPeriod = value("educationPeriod");
+
+      const educationElement =
+        document.getElementById("previewEducation");
+
+
+      if (education || institution || educationPeriod) {
+
+        educationElement.innerHTML = `
+
+          <div class="experience-title">
+            ${escapeHTML(education || "Curso / Formação")}
+          </div>
+
+          <div class="experience-company">
+            ${escapeHTML(institution || "Instituição")}
+            ${educationPeriod ? " · " + escapeHTML(educationPeriod) : ""}
+          </div>
+
+        `;
+
+      } else {
+
+        educationElement.innerHTML =
+          '<p class="empty-message">Sua formação aparecerá aqui.</p>';
+
+      }
+
+
+      const skills =
+        value("skillsInput")
+          .split(",")
+          .map(skill => skill.trim())
+          .filter(skill => skill);
+
+
+      const skillsElement =
+        document.getElementById("previewSkills");
+
+
+      if (skills.length > 0) {
+
+        skillsElement.innerHTML =
+          skills
+            .map(skill =>
+              `<span class="skill">${escapeHTML(skill)}</span>`
+            )
+            .join("");
+
+      } else {
+
+        skillsElement.innerHTML =
+          '<span class="empty-message">Suas habilidades aparecerão aqui.</span>';
+
+      }
+
+    }
+
+
+    function escapeHTML(text) {
+
+      const div = document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+
+    }
+
+
+    function clearForm() {
+
+      if (!confirm("Deseja apagar todos os dados?")) {
+        return;
+      }
+
+      fields.forEach(function(id) {
+
+        document.getElementById(id).value = "";
+
+      });
+
+      updateResume();
+
+    }
+
+
+    updateResume();
+
+  </script>
+
+</body>
+    </html>
