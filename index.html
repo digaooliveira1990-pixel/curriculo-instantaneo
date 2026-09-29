@@ -71,7 +71,7 @@
       background: white;
       border-radius: 16px;
       padding: 20px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
     }
 
     .card h2 {
@@ -84,6 +84,19 @@
       padding-bottom: 8px;
       border-bottom: 2px solid #e5e7eb;
       font-size: 17px;
+    }
+
+    .dynamic-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 14px;
+      background: #fafafa;
+    }
+
+    .dynamic-item h4 {
+      margin: 0 0 12px;
+      font-size: 15px;
     }
 
     label {
@@ -121,7 +134,7 @@
       border: none;
       border-radius: 10px;
       padding: 14px;
-      margin-top: 20px;
+      margin-top: 12px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
@@ -139,6 +152,23 @@
     .button-secondary {
       background: #e5e7eb;
       color: #111827;
+    }
+
+    .button-secondary:hover {
+      background: #d1d5db;
+    }
+
+    .button-danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .button-danger:hover {
+      background: #fecaca;
+    }
+
+    .add-button {
+      margin-top: 14px;
     }
 
     .skills {
@@ -205,6 +235,11 @@
       line-height: 1.6;
       white-space: pre-line;
       font-size: 14px;
+    }
+
+    .experience-block,
+    .education-block {
+      margin-bottom: 18px;
     }
 
     .experience-title {
@@ -321,22 +356,46 @@
         <h2>📝 Seus dados</h2>
 
         <label for="name">Nome completo</label>
-        <input id="name" type="text" placeholder="Ex.: João da Silva">
+        <input
+          id="name"
+          type="text"
+          placeholder="Ex.: João da Silva"
+        >
 
         <label for="job">Cargo desejado</label>
-        <input id="job" type="text" placeholder="Ex.: Auxiliar Administrativo">
+        <input
+          id="job"
+          type="text"
+          placeholder="Ex.: Auxiliar Administrativo"
+        >
 
         <label for="phone">Telefone</label>
-        <input id="phone" type="tel" placeholder="Ex.: (11) 99999-9999">
+        <input
+          id="phone"
+          type="tel"
+          placeholder="Ex.: (11) 99999-9999"
+        >
 
         <label for="email">E-mail</label>
-        <input id="email" type="email" placeholder="Ex.: joao@email.com">
+        <input
+          id="email"
+          type="email"
+          placeholder="Ex.: joao@email.com"
+        >
 
         <label for="city">Cidade / Estado</label>
-        <input id="city" type="text" placeholder="Ex.: São Paulo - SP">
+        <input
+          id="city"
+          type="text"
+          placeholder="Ex.: São Paulo - SP"
+        >
 
         <label for="linkedin">LinkedIn (opcional)</label>
-        <input id="linkedin" type="text" placeholder="linkedin.com/in/seunome">
+        <input
+          id="linkedin"
+          type="text"
+          placeholder="linkedin.com/in/seunome"
+        >
 
         <h3 class="section-title">🎯 Objetivo profissional</h3>
 
@@ -346,68 +405,93 @@
           placeholder="Escreva brevemente o que você busca profissionalmente."
         ></textarea>
 
-      >
         <h3 class="section-title">💼 Experiência profissional</h3>
 
-<div id="experienceContainer">
+        <div id="experienceContainer">
 
-<div class="experience-item">
+          <div class="dynamic-item experience-item">
 
-<h4>Experiência 1</h4>
+            <h4>Experiência 1</h4>
 
-<label>Empresa</label>
+            <label>Empresa</label>
+            <input
+              type="text"
+              class="company"
+              placeholder="Nome da empresa"
+            >
 
-<input
-type="text"
-class="company"
-placeholder="Nome da empresa"
->
+            <label>Cargo</label>
+            <input
+              type="text"
+              class="position"
+              placeholder="Seu cargo"
+            >
 
-<label>Cargo</label>
+            <label>Período</label>
+            <input
+              type="text"
+              class="period"
+              placeholder="Ex.: 2022 - 2025"
+            >
 
-<input
-type="text"
-class="position"
-placeholder="Seu cargo"
->
+            <label>Principais atividades</label>
+            <textarea
+              class="experience"
+              placeholder="Descreva suas principais atividades e responsabilidades."
+            ></textarea>
 
-<label>Período</label>
+          </div>
 
-<input
-type="text"
-class="period"
-placeholder="Ex.: 2022 - 2025"
->
+        </div>
 
-<label>Principais atividades</label>
-
-<textarea
-class="experience"
-placeholder="Descreva suas principais atividades e responsabilidades."
-></textarea>
-
-</div>
-
-</div>
-
-<button
-type="button"
-class="button button-secondary"
-onclick="addExperience()"
->
-➕ Adicionar experiência
-</button>
+        <button
+          type="button"
+          id="addExperienceButton"
+          class="button button-secondary add-button"
+        >
+          ➕ Adicionar experiência
+        </button>
 
         <h3 class="section-title">🎓 Formação</h3>
 
-        <label for="education">Curso / Formação</label>
-        <input id="education" type="text" placeholder="Ex.: Ensino Médio Completo">
+        <div id="educationContainer">
 
-        <label for="institution">Instituição</label>
-        <input id="institution" type="text" placeholder="Nome da instituição">
+          <div class="dynamic-item education-item">
 
-        <label for="educationPeriod">Período</label>
-        <input id="educationPeriod" type="text" placeholder="Ex.: 2018 - 2020">
+            <h4>Formação 1</h4>
+
+            <label>Curso / Formação</label>
+            <input
+              type="text"
+              class="education"
+              placeholder="Ex.: Ensino Médio Completo"
+            >
+
+            <label>Instituição</label>
+            <input
+              type="text"
+              class="institution"
+              placeholder="Nome da instituição"
+            >
+
+            <label>Período</label>
+            <input
+              type="text"
+              class="education-period"
+              placeholder="Ex.: 2018 - 2020"
+            >
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          id="addEducationButton"
+          class="button button-secondary add-button"
+        >
+          ➕ Adicionar formação
+        </button>
 
         <h3 class="section-title">🛠️ Habilidades</h3>
 
@@ -422,15 +506,17 @@ onclick="addExperience()"
         >
 
         <button
+          type="button"
+          id="printButton"
           class="button button-primary"
-          onclick="window.print()"
         >
           ⬇️ Baixar / Salvar em PDF
         </button>
 
         <button
+          type="button"
+          id="clearButton"
           class="button button-secondary"
-          onclick="clearForm()"
         >
           Limpar formulário
         </button>
@@ -492,58 +578,38 @@ onclick="addExperience()"
           </div>
 
 
-          <div class="resume-section">
+          <div class="resume-section" id="objectiveSection">
 
             <h3>Objetivo profissional</h3>
 
-            <p id="previewObjective" class="empty-message">
-              Seu objetivo profissional aparecerá aqui.
-            </p>
+            <p id="previewObjective"></p>
 
           </div>
 
 
-          <div class="resume-section">
+          <div class="resume-section" id="experienceSection">
 
             <h3>Experiência profissional</h3>
 
-            <div id="previewExperience">
-
-              <p class="empty-message">
-                Sua experiência profissional aparecerá aqui.
-              </p>
-
-            </div>
+            <div id="previewExperience"></div>
 
           </div>
 
 
-          <div class="resume-section">
+          <div class="resume-section" id="educationSection">
 
             <h3>Formação</h3>
 
-            <div id="previewEducation">
-
-              <p class="empty-message">
-                Sua formação aparecerá aqui.
-              </p>
-
-            </div>
+            <div id="previewEducation"></div>
 
           </div>
 
 
-          <div class="resume-section">
+          <div class="resume-section" id="skillsSection">
 
             <h3>Habilidades</h3>
 
-            <div class="skills" id="previewSkills">
-
-              <span class="empty-message">
-                Suas habilidades aparecerão aqui.
-              </span>
-
-            </div>
+            <div class="skills" id="previewSkills"></div>
 
           </div>
 
@@ -557,301 +623,374 @@ onclick="addExperience()"
 
 
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
 
-    const fields = [
-  "name",
-  "job",
-  "phone",
-  "email",
-  "city",
-  "linkedin",
-  "objective",
-  "education",
-  "institution",
-  "educationPeriod",
-  "skillsInput"
-];
+      const experienceContainer =
+        document.getElementById("experienceContainer");
 
-    fields.forEach(function(id) {
+      const educationContainer =
+        document.getElementById("educationContainer");
 
-      const element = document.getElementById(id);
+      const addExperienceButton =
+        document.getElementById("addExperienceButton");
 
-      element.addEventListener("input", updateResume);
+      const addEducationButton =
+        document.getElementById("addEducationButton");
 
-    });
+      const printButton =
+        document.getElementById("printButton");
+
+      const clearButton =
+        document.getElementById("clearButton");
 
 
-    function value(id) {
-
-      return document.getElementById(id).value.trim();
-
-    }
-
-    function addExperience() {
-  const container = document.getElementById("experienceContainer");
-
-  const item = document.createElement("div");
-  item.className = "experience-item";
-
-  item.innerHTML = `
-    <hr>
-
-    <h4>Nova experiência</h4>
-
-    <label>Empresa</label>
-
-    <input
-      type="text"
-      class="company"
-      placeholder="Nome da empresa"
-    >
-
-    <label>Cargo</label>
-
-    <input
-      type="text"
-      class="position"
-      placeholder="Seu cargo"
-    >
-
-    <label>Período</label>
-
-    <input
-      type="text"
-      class="period"
-      placeholder="Ex.: 2022 - 2025"
-    >
-
-    <label>Principais atividades</label>
-
-    <textarea
-      class="experience"
-      placeholder="Descreva suas principais atividades e responsabilidades."
-    ></textarea>
-
-    <button
-      type="button"
-      class="button button-secondary"
-      onclick="removeExperience(this)"
-    >
-      🗑️ Remover experiência
-    </button>
-  `;
-
-  container.appendChild(item);
-
-  item.querySelectorAll("input, textarea").forEach(function(element) {
-    element.addEventListener("input", updateResume);
-  });
-
-  updateResume();
-}
-
-function removeExperience(button) {
-  const item = button.closest(".experience-item");
-
-  if (item) {
-    item.remove();
-    updateResume();
-  }
-}
-
-    function updateResume() {
-
-      document.getElementById("previewName").textContent =
-        value("name") || "Seu Nome";
-
-      document.getElementById("previewJob").textContent =
-        value("job") || "Cargo desejado";
-
-      document.getElementById("previewPhone").textContent =
-        value("phone") || "Telefone";
-
-      document.getElementById("previewEmail").textContent =
-        value("email") || "E-mail";
-
-      document.getElementById("previewCity").textContent =
-        value("city") || "Cidade / Estado";
+      function escapeHTML(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
 
 
-      const linkedin = value("linkedin");
-
-      document.getElementById("previewLinkedin").textContent =
-        linkedin ? linkedin : "";
-
-
-      const objective = value("objective");
-
-      const objectiveElement =
-        document.getElementById("previewObjective");
-
-      objectiveElement.textContent =
-        objective || "";
-
-      objectiveElement.className =
-        objective ? "" : "empty-message";
-
-
-       const experienceElement =
-  document.getElementById("previewExperience");
-
-experienceElement.innerHTML = "";
-
-const experienceItems =
-  document.querySelectorAll(".experience-item");
-
-experienceItems.forEach(function(item) {
-
-  const company =
-    item.querySelector(".company").value.trim();
-
-  const position =
-    item.querySelector(".position").value.trim();
-
-  const period =
-    item.querySelector(".period").value.trim();
-
-  const experience =
-    item.querySelector(".experience").value.trim();
-
-  if (company || position || period || experience) {
-
-    experienceElement.innerHTML += `
-      <div class="experience-block">
-
-        <div class="experience-title">
-          ${escapeHTML(position || "Cargo")}
-        </div>
-
-        <div class="experience-company">
-          ${escapeHTML(company || "Empresa")}
-          ${period ? " · " + escapeHTML(period) : ""}
-        </div>
-
-        ${
-          experience
-            ? `<p>${escapeHTML(experience)}</p>`
-            : ""
+      function getValue(element) {
+        if (!element) {
+          return "";
         }
 
-      </div>
-    `;
-  }
-});
-
+        return element.value.trim();
       }
 
 
-      const education = value("education");
-      const institution = value("institution");
-      const educationPeriod = value("educationPeriod");
+      function updateBasicPreview() {
 
-      const educationElement =
-        document.getElementById("previewEducation");
+        const name =
+          getValue(document.getElementById("name"));
 
+        const job =
+          getValue(document.getElementById("job"));
 
-      if (education || institution || educationPeriod) {
+        const phone =
+          getValue(document.getElementById("phone"));
 
-        educationElement.innerHTML = `
+        const email =
+          getValue(document.getElementById("email"));
 
-          <div class="experience-title">
-            ${escapeHTML(education || "Curso / Formação")}
-          </div>
+        const city =
+          getValue(document.getElementById("city"));
 
-          <div class="experience-company">
-            ${escapeHTML(institution || "Instituição")}
-            ${educationPeriod ? " · " + escapeHTML(educationPeriod) : ""}
-          </div>
+        const linkedin =
+          getValue(document.getElementById("linkedin"));
 
-        `;
+        const objective =
+          getValue(document.getElementById("objective"));
 
-      } else {
-
-        educationElement.innerHTML = "";
-        
-
-      }
+        const skillsInput =
+          getValue(document.getElementById("skillsInput"));
 
 
-      const skills =
-        value("skillsInput")
-          .split(",")
-          .map(skill => skill.trim())
-          .filter(skill => skill);
+        document.getElementById("previewName").textContent =
+          name || "Seu Nome";
+
+        document.getElementById("previewJob").textContent =
+          job || "Cargo desejado";
+
+        document.getElementById("previewPhone").textContent =
+          phone || "Telefone";
+
+        document.getElementById("previewEmail").textContent =
+          email || "E-mail";
+
+        document.getElementById("previewCity").textContent =
+          city || "Cidade / Estado";
+
+        document.getElementById("previewLinkedin").textContent =
+          linkedin;
 
 
-      const skillsElement =
-        document.getElementById("previewSkills");
+        const objectiveElement =
+          document.getElementById("previewObjective");
+
+        objectiveElement.textContent =
+          objective;
+
+        document.getElementById("objectiveSection").style.display =
+          objective ? "" : "none";
 
 
-      if (skills.length > 0) {
+        const skillsElement =
+          document.getElementById("previewSkills");
 
-        skillsElement.innerHTML =
-          skills
-            .map(skill =>
-              `<span class="skill">${escapeHTML(skill)}</span>`
-            )
-            .join("");
+        const skills =
+          skillsInput
+            .split(",")
+            .map(function (skill) {
+              return skill.trim();
+            })
+            .filter(function (skill) {
+              return skill.length > 0;
+            });
 
-      } else {
 
         skillsElement.innerHTML = "";
 
+        skills.forEach(function (skill) {
 
+          const span =
+            document.createElement("span");
+
+          span.className = "skill";
+          span.textContent = skill;
+
+          skillsElement.appendChild(span);
+
+        });
+
+
+        document.getElementById("skillsSection").style.display =
+          skills.length > 0 ? "" : "none";
       }
 
-    }
 
-    function clearForm() {
+      function updateExperiences() {
 
-  if (!confirm("Deseja apagar todos os dados?"))
-    return;
+        const preview =
+          document.getElementById("previewExperience");
 
-  fields.forEach(function(id) {
-    document.getElementById(id).value = "";
-  });
+        preview.innerHTML = "";
 
-  const experienceItems =
-    document.querySelectorAll(".experience-item");
+        const items =
+          experienceContainer.querySelectorAll(".experience-item");
 
-  experienceItems.forEach(function(item, index) {
-
-    if (index === 0) {
-
-      item.querySelector(".company").value = "";
-      item.querySelector(".position").value = "";
-      item.querySelector(".period").value = "";
-      item.querySelector(".experience").value = "";
-
-    } else {
-
-      item.remove();
-
-    }
-
-  });
-
-  updateResume();
-
-    }
-
-    function escapeHTML(text) {
-
-      const div = document.createElement("div");
-
-      div.textContent = text;
-
-      return div.innerHTML;
-
-    }
+        let hasExperience = false;
 
 
-    
+        items.forEach(function (item) {
+
+          const company =
+            getValue(item.querySelector(".company"));
+
+          const position =
+            getValue(item.querySelector(".position"));
+
+          const period =
+            getValue(item.querySelector(".period"));
+
+          const experience =
+            getValue(item.querySelector(".experience"));
 
 
-    updateResume();
+          if (!company && !position && !period && !experience) {
+            return;
+          }
 
-  </script>
 
-</body>
-    </html>
+          hasExperience = true;
+
+
+          const block =
+            document.createElement("div");
+
+          block.className = "experience-block";
+
+
+          const title =
+            document.createElement("div");
+
+          title.className = "experience-title";
+          title.textContent =
+            position || "Cargo";
+
+
+          const companyLine =
+            document.createElement("div");
+
+          companyLine.className = "experience-company";
+
+
+          if (company && period) {
+            companyLine.textContent =
+              company + " · " + period;
+
+          } else if (company) {
+            companyLine.textContent =
+              company;
+
+          } else if (period) {
+            companyLine.textContent =
+              period;
+
+          } else {
+            companyLine.textContent =
+              "Empresa";
+          }
+
+
+          block.appendChild(title);
+          block.appendChild(companyLine);
+
+
+          if (experience) {
+
+            const description =
+              document.createElement("p");
+
+            description.textContent =
+              experience;
+
+            block.appendChild(description);
+          }
+
+
+          preview.appendChild(block);
+
+        });
+
+
+        document.getElementById("experienceSection").style.display =
+          hasExperience ? "" : "none";
+      }
+
+
+      function updateEducation() {
+
+        const preview =
+          document.getElementById("previewEducation");
+
+        preview.innerHTML = "";
+
+        const items =
+          educationContainer.querySelectorAll(".education-item");
+
+        let hasEducation = false;
+
+
+        items.forEach(function (item) {
+
+          const education =
+            getValue(item.querySelector(".education"));
+
+          const institution =
+            getValue(item.querySelector(".institution"));
+
+          const period =
+            getValue(item.querySelector(".education-period"));
+
+
+          if (!education && !institution && !period) {
+            return;
+          }
+
+
+          hasEducation = true;
+
+
+          const block =
+            document.createElement("div");
+
+          block.className = "education-block";
+
+
+          const title =
+            document.createElement("div");
+
+          title.className = "experience-title";
+          title.textContent =
+            education || "Curso / Formação";
+
+
+          const institutionLine =
+            document.createElement("div");
+
+          institutionLine.className = "experience-company";
+
+
+          if (institution && period) {
+            institutionLine.textContent =
+              institution + " · " + period;
+
+          } else if (institution) {
+            institutionLine.textContent =
+              institution;
+
+          } else if (period) {
+            institutionLine.textContent =
+              period;
+
+          } else {
+            institutionLine.textContent =
+              "Instituição";
+          }
+
+
+          block.appendChild(title);
+          block.appendChild(institutionLine);
+
+          preview.appendChild(block);
+
+        });
+
+
+        document.getElementById("educationSection").style.display =
+          hasEducation ? "" : "none";
+      }
+
+
+      function updateResume() {
+        updateBasicPreview();
+        updateExperiences();
+        updateEducation();
+      }
+
+
+      function connectDynamicInputs(container) {
+
+        container
+          .querySelectorAll("input, textarea")
+          .forEach(function (element) {
+
+            element.addEventListener(
+              "input",
+              updateResume
+            );
+
+          });
+      }
+
+
+      function updateExperienceNumbers() {
+
+        const items =
+          experienceContainer.querySelectorAll(".experience-item");
+
+        items.forEach(function (item, index) {
+
+          const title =
+            item.querySelector("h4");
+
+          title.textContent =
+            "Experiência " + (index + 1);
+
+        });
+      }
+
+
+      function updateEducationNumbers() {
+
+        const items =
+          educationContainer.querySelectorAll(".education-item");
+
+        items.forEach(function (item, index) {
+
+          const title =
+            item.querySelector("h4");
+
+          title.textContent =
+            "Formação " + (index + 1);
+
+        });
+      }
+
+
+      function addExperience() {
+
+        const item =
+          document.createElement("di
