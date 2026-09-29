@@ -587,7 +587,7 @@
         document.getElementById("previewObjective");
 
       objectiveElement.textContent =
-        objective || "Seu objetivo profissional aparecerá aqui.";
+        objective || "";
 
       objectiveElement.className =
         objective ? "" : "empty-message";
@@ -654,8 +654,8 @@
 
       } else {
 
-        educationElement.innerHTML =
-          '<p class="empty-message">Sua formação aparecerá aqui.</p>';
+        educationElement.innerHTML = "";
+        
 
       }
 
@@ -682,8 +682,8 @@
 
       } else {
 
-        skillsElement.innerHTML =
-          '<span class="empty-message">Suas habilidades aparecerão aqui.</span>';
+        skillsElement.innerHTML = "";
+
 
       }
 
